@@ -3,6 +3,7 @@ import 'package:delivery_app/features/dashboard/home/home.dart';
 import 'package:delivery_app/features/dashboard/home/home2.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/homepage.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/pages/payment.dart';
+import 'package:delivery_app/features/dashboard/view/homepage/pages/succes.dart';
 import 'package:delivery_app/features/onboarding/login_screen.dart';
 import 'package:delivery_app/features/onboarding/register.dart';
 import 'package:flutter/material.dart';
@@ -17,6 +18,7 @@ enum AppRoutes {
   dashboard,
   homepage,
   payments,
+  success,
 }
 
 final GlobalKey<NavigatorState> rootNavigator = GlobalKey(debugLabel: 'root');
@@ -93,6 +95,15 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
           name: AppRoutes.payments.name,
           builder: (context, state) {
             return PaymentPage(
+              key: state.pageKey,
+            );
+          },
+        ),
+        GoRoute(
+          path: '/success',
+          name: AppRoutes.success.name,
+          builder: (context, state) {
+            return SuccessPage(
               key: state.pageKey,
             );
           },

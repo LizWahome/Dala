@@ -1,7 +1,9 @@
 import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/models/checkout_model.dart';
+import 'package:delivery_app/router/go_router.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 class PaymentPage extends StatefulWidget {
   const PaymentPage({super.key});
@@ -36,38 +38,43 @@ class _PaymentPageState extends State<PaymentPage> {
         margin: const EdgeInsets.all(20),
         child: ListView.separated(
             itemBuilder: (context, index) {
-              return Container(
-                padding: const EdgeInsets.all(20),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(20),
-                    color: context.scaffoldColor),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      payments[index].sText,
-                      style: context.bodyLarge
-                          ?.copyWith(fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16.0),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: Colors.transparent,
-                            radius: 30,
-                            backgroundImage: AssetImage(
-                                payments[index].image),
-                          ),
-                          Text(
-                            payments[index].bText,
-                            style: context.headlineMedium
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          )
-                        ],
+              return InkWell(
+                onTap: () {
+                  context.pushNamed(AppRoutes.success.name);
+                },
+                child: Container(
+                  padding: const EdgeInsets.all(20),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: context.scaffoldColor),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        payments[index].sText,
+                        style: context.bodyLarge
+                            ?.copyWith(fontWeight: FontWeight.bold),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 16.0),
+                        child: Row(
+                          children: [
+                            CircleAvatar(
+                              backgroundColor: Colors.transparent,
+                              radius: 30,
+                              backgroundImage:
+                                  AssetImage(payments[index].image),
+                            ),
+                            Text(
+                              payments[index].bText,
+                              style: context.headlineMedium
+                                  ?.copyWith(fontWeight: FontWeight.bold),
+                            )
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
                 ),
               );
             },
