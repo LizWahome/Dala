@@ -1,6 +1,6 @@
 import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
-import 'package:delivery_app/common/widgets/buttons.dart';
+import 'package:delivery_app/common/widgets/buttons/buttons.dart';
 import 'package:delivery_app/common/widgets/input_field.dart';
 import 'package:delivery_app/router/go_router.dart';
 import 'package:flutter/material.dart';

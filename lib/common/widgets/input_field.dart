@@ -15,7 +15,7 @@ class InputField extends StatelessWidget {
       children: [
         Text(label, style: context.titleSmall?.copyWith(color: context.tertially, letterSpacing: 1),),
         Padding(
-          padding: const EdgeInsets.symmetric(vertical: 16.0),
+          padding: const EdgeInsets.only(bottom: 16.0),
           child: TextFormField(
             controller: controller,
             decoration: InputDecoration(

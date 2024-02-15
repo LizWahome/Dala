@@ -42,7 +42,7 @@ class MyApp extends ConsumerWidget {
             textTheme: GoogleFonts.poppinsTextTheme(),
             useMaterial3ErrorColors: true,
             useMaterial3: true,
-            scheme: FlexScheme.mandyRed),
+            scheme: FlexScheme.deepBlue),
             themeMode: ThemeMode.light,
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,

@@ -1,5 +1,8 @@
-import 'package:delivery_app/features/dashboard/home.dart';
-import 'package:delivery_app/features/dashboard/home2.dart';
+import 'package:delivery_app/features/dashboard/view/dashboard.dart';
+import 'package:delivery_app/features/dashboard/home/home.dart';
+import 'package:delivery_app/features/dashboard/home/home2.dart';
+import 'package:delivery_app/features/dashboard/view/homepage/homepage.dart';
+import 'package:delivery_app/features/dashboard/view/homepage/pages/payment.dart';
 import 'package:delivery_app/features/onboarding/login_screen.dart';
 import 'package:delivery_app/features/onboarding/register.dart';
 import 'package:flutter/material.dart';
@@ -11,6 +14,9 @@ enum AppRoutes {
   register,
   home,
   home2,
+  dashboard,
+  homepage,
+  payments,
 }
 
 final GlobalKey<NavigatorState> rootNavigator = GlobalKey(debugLabel: 'root');
@@ -52,6 +58,41 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
           name: AppRoutes.home2.name,
           builder: (context, state) {
             return HomeScreen2(
+              key: state.pageKey,
+            );
+          },
+        ),
+        // GoRoute(
+        //   path: '/details',
+        //   name: AppRoutes.details.name,
+        //   builder: (context, state) {
+        //     return DetailsPage(key: state.pageKey, menu: menu);
+        //   },
+        // )
+        GoRoute(
+            path: '/dashboard',
+            name: AppRoutes.dashboard.name,
+            builder: (context, state) {
+              return DashBoardPage(
+                key: state.pageKey,
+              );
+            },
+            routes: [
+              GoRoute(
+                path: 'homepage',
+                name: AppRoutes.homepage.name,
+                builder: (context, state) {
+                  return HomePage(
+                    key: state.pageKey,
+                  );
+                },
+              )
+            ]),
+        GoRoute(
+          path: '/payments',
+          name: AppRoutes.payments.name,
+          builder: (context, state) {
+            return PaymentPage(
               key: state.pageKey,
             );
           },

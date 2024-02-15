@@ -1,5 +1,8 @@
 import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
+import 'package:delivery_app/common/widgets/horizontal_list.dart';
+import 'package:delivery_app/common/widgets/one_line_row.dart';
+import 'package:delivery_app/features/dashboard/home/models/models.dart';
 import 'package:delivery_app/router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -22,23 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
     Categories(icon: Icons.houseboat, text: "Apartment"),
     Categories(icon: Icons.border_all_rounded, text: "See All"),
   ];
-  List<Recommended> recommended = [
-    Recommended(
-        image: "assets/images/hotel-1979406_1280.jpg",
-        text: "Fauget Apartment",
-        rate: "5.0 (770k)",
-        distance: "5km"),
-    Recommended(
-        image: "assets/images/water-165219_1280.jpg",
-        text: "Borcelle Resort",
-        rate: "4.5 (770k)",
-        distance: "7km"),
-    Recommended(
-        image: "assets/images/inner-space-1026449_1280.jpg",
-        text: "Guinea Riff",
-        rate: "4.7 (770k)",
-        distance: "3km")
-  ];
+
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -126,7 +113,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             const CircleAvatar(
                               radius: 30,
                               backgroundImage: AssetImage(
-                                  "assets/images/macaroon-4090598_1280.jpg"),
+                                  "assets/images/model-1814202_1280.jpg"),
                             )
                           ],
                         )
@@ -160,15 +147,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            const Text("Categories"),
-                            IconButton(
+                        OneLineRow(text: "Categories", widget:  IconButton(
                                 onPressed: () {},
-                                icon: const Icon(Icons.keyboard_control))
-                          ],
-                        ),
+                                icon: const Icon(Icons.keyboard_control))),
                         Wrap(
                           children: List.generate(categories.length, (index) {
                             return Column(
@@ -189,124 +170,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             );
                           }),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text("Recommended"),
-                              IconButton(
+                      OneLineRow(text: "Recommended", widget: IconButton(
                                   onPressed: () {},
-                                  icon: const Icon(Icons.keyboard_control))
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    Container(
-                                      width: 160,
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: AssetImage(
-                                                  recommended[index].image))),
-                                    ),
-                                    Text(
-                                      recommended[index].text,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: context.primary,
-                                          size: 15,
-                                        ),
-                                        Text(recommended[index].rate),
-                                        const Icon(
-                                          Icons.location_on_sharp,
-                                          color: Colors.grey,
-                                          size: 15,
-                                        ),
-                                        Text(
-                                          recommended[index].distance,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const SizedBox(width: 15);
-                              },
-                              itemCount: recommended.length),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              const Text("Nearby"),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.keyboard_control))
-                            ],
-                          ),
-                        ),
-                        SizedBox(
-                          height: 200,
-                          child: ListView.separated(
-                              scrollDirection: Axis.horizontal,
-                              itemBuilder: (context, index) {
-                                return Column(
-                                  children: [
-                                    Container(
-                                      width: 160,
-                                      height: 160,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          image: DecorationImage(
-                                              fit: BoxFit.cover,
-                                              image: AssetImage(
-                                                  recommended[index].image))),
-                                    ),
-                                    Text(
-                                      recommended[index].text,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Icon(
-                                          Icons.star,
-                                          color: context.primary,
-                                          size: 15,
-                                        ),
-                                        Text(recommended[index].rate),
-                                        const Icon(
-                                          Icons.location_on_sharp,
-                                          color: Colors.grey,
-                                          size: 15,
-                                        ),
-                                        Text(
-                                          recommended[index].distance,
-                                        )
-                                      ],
-                                    )
-                                  ],
-                                );
-                              },
-                              separatorBuilder: (context, index) {
-                                return const SizedBox(width: 15);
-                              },
-                              itemCount: recommended.length),
-                        )
+                                  icon: const Icon(Icons.keyboard_control))),
+                      HorizontalList(),
+                       OneLineRow(text: "Nearby", widget:  IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.keyboard_control))),
+                       HorizontalList()
                       ],
                     ),
                   ),
@@ -326,20 +197,4 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 }
 
-class Categories {
-  final IconData icon;
-  final String text;
-  Categories({required this.icon, required this.text});
-}
 
-class Recommended {
-  final String image;
-  final String text;
-  final String rate;
-  final String distance;
-  Recommended(
-      {required this.image,
-      required this.text,
-      required this.rate,
-      required this.distance});
-}

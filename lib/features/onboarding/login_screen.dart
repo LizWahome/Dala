@@ -1,5 +1,5 @@
 import 'package:delivery_app/common/extension/text_styles.dart';
-import 'package:delivery_app/common/widgets/buttons.dart';
+import 'package:delivery_app/common/widgets/buttons/buttons.dart';
 import 'package:delivery_app/common/widgets/input_field.dart';
 import 'package:delivery_app/router/go_router.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +13,7 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final _formKey = GlobalKey<FormState>();
   final TextEditingController nameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   @override
@@ -41,6 +42,7 @@ class _LoginScreenState extends State<LoginScreen> {
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 40, vertical: 30),
               child: Form(
+                key: _formKey,
                   child: Column(
                 children: [
                   InputField(
