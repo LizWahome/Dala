@@ -8,7 +8,12 @@ class RowWidget extends StatelessWidget {
   final Color btnColor;
   final String text2;
   final Color btnColor2;
-  const RowWidget({super.key, required this.text, required this.btnColor, required this.text2, required this.btnColor2});
+  const RowWidget(
+      {super.key,
+      required this.text,
+      required this.btnColor,
+      required this.text2,
+      required this.btnColor2});
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +40,37 @@ class RowWidget extends StatelessWidget {
           width: screenSize.width * 0.4,
         ),
       ],
+    );
+  }
+}
+
+class IconRowWidget extends StatelessWidget {
+  final IconData icon;
+  final String description;
+  const IconRowWidget(
+      {super.key, required this.icon, required this.description});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: Icon(
+              icon,
+              color: Colors.amber,
+            ),
+          ),
+          Expanded(
+              child: Text(
+            description,
+            style: TextStyle(color: Colors.grey.withOpacity(1)),
+          ))
+        ],
+      ),
     );
   }
 }

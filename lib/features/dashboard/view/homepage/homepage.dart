@@ -7,7 +7,9 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  final String? text;
+  final bool isText;
+  const HomePage({super.key, this.text, this.isText = false});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -59,11 +61,12 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
                         Text(
-                          "For most delicious",
+                          widget.text ?? "For most delicious",
                           style: context.bodyLarge?.copyWith(
                               color: context.scaffoldColor,
                               fontWeight: FontWeight.bold),
                         ),
+                        widget.isText? SizedBox() : 
                         Text("recipes",
                             style: context.bodyLarge
                                 ?.copyWith(color: context.scaffoldColor))
@@ -195,9 +198,11 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                 ),
-               OutlineButton(press: (){
-                context.pushNamed(AppRoutes.payments.name);
-               }, text: "CHECKOUT")
+                OutlineButton(
+                    press: () {
+                      context.pushNamed(AppRoutes.payments.name);
+                    },
+                    text: "CHECKOUT")
               ],
             ),
           ),

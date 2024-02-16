@@ -1,8 +1,7 @@
 import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
 import 'package:delivery_app/common/widgets/one_line_row.dart';
-import 'package:delivery_app/features/dashboard/home/details_page.dart';
-import 'package:delivery_app/features/dashboard/home/models/models.dart';
+import 'package:delivery_app/features/dashboard/home/widgets/wrap_widget.dart';
 import 'package:delivery_app/router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -16,14 +15,6 @@ class HomeScreen2 extends StatefulWidget {
 }
 
 class _HomeScreen2State extends State<HomeScreen2> {
-  List<SpecialMenu> specialMenu = [
-    SpecialMenu(
-        image: "assets/images/pasta-329522_1280.jpg", text: "Spaghetti"),
-    SpecialMenu(
-        image: "assets/images/drinks-7877830_1280.jpg", text: "Mango juice"),
-    SpecialMenu(
-        image: "assets/images/steak-1445124_1280.jpg", text: "Beef steak")
-  ];
   PageController controller = PageController();
   int index = 0;
   @override
@@ -157,41 +148,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                         activeDotColor: Colors.amber),
                   ),
                   OneLineRow(text: "Special Menu", widget: TextButton(onPressed: (){}, child: const Text("See All"))),
-                  Wrap(
-                    children: List.generate(specialMenu.length, (index) {
-                      return InkWell(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) =>
-                                      DetailsPage(menu: specialMenu[index])));
-                        },
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Container(
-                                height: 100,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(20),
-                                    image: DecorationImage(
-                                        image:
-                                            AssetImage(specialMenu[index].image),
-                                        fit: BoxFit.cover)),
-                              ),
-                            ),
-                            Text(
-                              specialMenu[index].text,
-                              style: TextStyle(
-                                  fontSize: 12, color: context.tertially),
-                            )
-                          ],
-                        ),
-                      );
-                    }),
-                  ),
+                 WrapWidget(),
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(12),

@@ -3,8 +3,21 @@ import 'package:delivery_app/features/dashboard/home/models/models.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalList extends StatefulWidget {
+  final double? height;
+  final double? width;
+  final double? boxHeight;
+  final double? sizedBox;
+  final Widget? widget;
+  final bool isText;
+  final double? borderRadius;
   const HorizontalList(
-      {super.key});
+      {super.key,
+      this.height,
+      this.width,
+      this.boxHeight,
+      this.sizedBox,
+      this.widget,
+      this.isText = false, this.borderRadius});
 
   @override
   State<HorizontalList> createState() => _HorizontalListState();
@@ -31,7 +44,7 @@ class _HorizontalListState extends State<HorizontalList> {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 200,
+      height: widget.boxHeight ?? 200,
       child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) {
@@ -39,40 +52,43 @@ class _HorizontalListState extends State<HorizontalList> {
             return Column(
               children: [
                 Container(
-                  width: 160,
-                  height: 160,
+                  width: widget.width ?? 160,
+                  height: widget.height ?? 160,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(widget.borderRadius?? 30),
                       image: DecorationImage(
                           fit: BoxFit.cover,
                           image: AssetImage(recomend.image))),
                 ),
-                Text(
-                  recomend.text,
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.star,
-                      color: context.primary,
-                      size: 15,
+                widget.isText
+                    ? SizedBox()
+                    : Text(
+                        recomend.text,
+                      ),
+                widget.widget ??
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.star,
+                          color: context.primary,
+                          size: 15,
+                        ),
+                        Text(recomend.rate),
+                        const Icon(
+                          Icons.location_on_sharp,
+                          color: Colors.grey,
+                          size: 15,
+                        ),
+                        Text(
+                          recomend.distance,
+                        )
+                      ],
                     ),
-                    Text(recomend.rate),
-                    const Icon(
-                      Icons.location_on_sharp,
-                      color: Colors.grey,
-                      size: 15,
-                    ),
-                    Text(
-                      recomend.distance,
-                    )
-                  ],
-                )
               ],
             );
           },
           separatorBuilder: (context, index) {
-            return const SizedBox(width: 15);
+            return SizedBox(width: widget.sizedBox ?? 15);
           },
           itemCount: recommended.length),
     );

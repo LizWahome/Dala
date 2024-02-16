@@ -1,9 +1,12 @@
+import 'package:delivery_app/features/dashboard/view/cart/cart.dart';
 import 'package:delivery_app/features/dashboard/view/dashboard.dart';
 import 'package:delivery_app/features/dashboard/home/home.dart';
 import 'package:delivery_app/features/dashboard/home/home2.dart';
+import 'package:delivery_app/features/dashboard/view/discover/discover.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/homepage.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/pages/payment.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/pages/succes.dart';
+import 'package:delivery_app/features/dashboard/view/search/search.dart';
 import 'package:delivery_app/features/onboarding/login_screen.dart';
 import 'package:delivery_app/features/onboarding/register.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +22,9 @@ enum AppRoutes {
   homepage,
   payments,
   success,
+  discover,
+  cart,
+  search,
 }
 
 final GlobalKey<NavigatorState> rootNavigator = GlobalKey(debugLabel: 'root');
@@ -85,6 +91,33 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
                 name: AppRoutes.homepage.name,
                 builder: (context, state) {
                   return HomePage(
+                    key: state.pageKey,
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'discover',
+                name: AppRoutes.discover.name,
+                builder: (context, state) {
+                  return DiscoverPage(
+                    key: state.pageKey,
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'cart',
+                name: AppRoutes.cart.name,
+                builder: (context, state) {
+                  return CartPage(
+                    key: state.pageKey,
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'search',
+                name: AppRoutes.search.name,
+                builder: (context, state) {
+                  return SearchPage(
                     key: state.pageKey,
                   );
                 },

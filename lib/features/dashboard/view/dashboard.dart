@@ -1,5 +1,8 @@
 import 'package:delivery_app/common/extension/theme_colors.dart';
+import 'package:delivery_app/features/dashboard/view/cart/cart.dart';
+import 'package:delivery_app/features/dashboard/view/discover/discover.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/homepage.dart';
+import 'package:delivery_app/features/dashboard/view/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,8 +16,9 @@ class DashBoardPage extends ConsumerStatefulWidget {
 class _DashBoardPageState extends ConsumerState<DashBoardPage> {
   final List<Widget> _pages = [
     const HomePage(),
-    const Text("Discover"),
-    const Text("Search"),
+    const DiscoverPage(),
+    const SearchPage(),
+    const CartPage(),
     const Text("Profile")
   ];
   final pageProvider = StateProvider<int>((ref) => 0);
@@ -45,6 +49,7 @@ class _DashBoardPageState extends ConsumerState<DashBoardPage> {
             label: "Search",
             icon: Icon(Icons.search),
           ),
+          BottomNavigationBarItem(icon: Icon(Icons.shopping_cart), label: "Cart"),
           BottomNavigationBarItem(
             label: "Profile",
             icon: Icon(Icons.person),
