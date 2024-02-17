@@ -148,7 +148,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
                         activeDotColor: Colors.amber),
                   ),
                   OneLineRow(text: "Special Menu", widget: TextButton(onPressed: (){}, child: const Text("See All"))),
-                 WrapWidget(),
+                 const WrapWidget(),
                   Container(
                     margin: const EdgeInsets.only(top: 20),
                     padding: const EdgeInsets.all(12),
@@ -156,30 +156,32 @@ class _HomeScreen2State extends State<HomeScreen2> {
                       borderRadius: BorderRadius.circular(25),
                       color: context.secondary,
                     ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              "Free Delivery\nOrder!",
-                              style: context.headlineLarge?.copyWith(
-                                  color: Colors.white.withOpacity(0.9),
-                                  fontWeight: FontWeight.bold),
-                            ),
-                            Text(
-                              "For purchaces over \$100!",
-                              style: context.dividerTextSmall?.copyWith(
-                                  color: Colors.white.withOpacity(0.8)),
-                            )
-                          ],
-                        ),
-                        Image.asset(
-                          "assets/images/food-delivery-5217579_1280-removebg-preview.png",
-                          height: 70,
-                        )
-                      ],
+                    child: FittedBox(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "Free Delivery\nOrder!",
+                                style: context.headlineLarge?.copyWith(
+                                    color: Colors.white.withOpacity(0.9),
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              Text(
+                                "For purchaces over \$100!",
+                                style: context.dividerTextSmall?.copyWith(
+                                    color: Colors.white.withOpacity(0.8)),
+                              )
+                            ],
+                          ),
+                          Image.asset(
+                            "assets/images/food-delivery-5217579_1280-removebg-preview.png",
+                            height: 70,
+                          )
+                        ],
+                      ),
                     ),
                   )
                 ],

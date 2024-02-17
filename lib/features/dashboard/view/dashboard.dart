@@ -2,6 +2,7 @@ import 'package:delivery_app/common/extension/theme_colors.dart';
 import 'package:delivery_app/features/dashboard/view/cart/cart.dart';
 import 'package:delivery_app/features/dashboard/view/discover/discover.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/homepage.dart';
+import 'package:delivery_app/features/dashboard/view/profile/profile.dart';
 import 'package:delivery_app/features/dashboard/view/search/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -19,7 +20,7 @@ class _DashBoardPageState extends ConsumerState<DashBoardPage> {
     const DiscoverPage(),
     const SearchPage(),
     const CartPage(),
-    const Text("Profile")
+    const ProfilePage()
   ];
   final pageProvider = StateProvider<int>((ref) => 0);
   @override

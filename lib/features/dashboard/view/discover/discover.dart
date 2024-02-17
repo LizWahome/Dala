@@ -1,4 +1,7 @@
 import 'package:delivery_app/common/extension/theme_colors.dart';
+import 'package:delivery_app/common/widgets/appbar.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/cab/cab.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/drinks/drinks.dart';
 import 'package:delivery_app/features/dashboard/view/discover/tabs/hotel/hotel.dart';
 import 'package:flutter/material.dart';
 
@@ -14,11 +17,7 @@ class _DiscoverPageState extends State<DiscoverPage> {
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-            onPressed: () {}, icon: const Icon(Icons.arrow_back_ios_new_rounded)),
-        title: const Text("Discover"),
-      ),
+      appBar: const AppBarWidget(title: "Discover"),
       body: DefaultTabController(
         length: 4,
         child: SingleChildScrollView(
@@ -55,9 +54,9 @@ class _DiscoverPageState extends State<DiscoverPage> {
                       child: TabBarView(
                         children: [
                           HotelPage(),
-                          Text("Cab"),
-                          Text("Food"),
+                          CabPage(),
                           Text("Drinks"),
+                          DrinksPage(),
                         ],
                       ),
                     ),

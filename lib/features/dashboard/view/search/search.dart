@@ -1,7 +1,9 @@
 import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
+import 'package:delivery_app/common/widgets/circular_wrap.dart';
 import 'package:delivery_app/common/widgets/horizontal_list.dart';
-import 'package:delivery_app/features/dashboard/home/models/models.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/cab/cab.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/drinks/drinks.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
@@ -12,13 +14,6 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
-  final List<Categories> categories = [
-    Categories(icon: Icons.business_rounded, text: "Hotel"),
-    Categories(icon: Icons.map_outlined, text: "Destination"),
-    Categories(icon: Icons.food_bank_rounded, text: "Food"),
-    Categories(icon: Icons.shopping_cart, text: "Shopping"),
-    Categories(icon: Icons.maps_home_work_rounded, text: "rental"),
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +64,12 @@ class _SearchPageState extends State<SearchPage> {
                         style: context.bodyLarge,
                       ),
                       IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CabPage()));
+                          },
                           icon: Icon(
                             Icons.search,
                             color: Colors.blue.shade900,
@@ -95,37 +95,44 @@ class _SearchPageState extends State<SearchPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Wrap(
-                  children: List.generate(categories.length, (index) {
-                    return Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 30,
-                          backgroundColor: context.tertially,
-                          child: Padding(
-                            padding: const EdgeInsets.all(10.0),
-                            child: Icon(
-                              categories[index].icon,
-                              size: 40,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
-                        Text(categories[index].text)
-                      ],
-                    );
-                  }),
-                ),
+                CircularWrap(color: context.tertially),
                 Padding(
                   padding: const EdgeInsets.only(top: 12.0, bottom: 8),
-                  child: Text("Popular Destinations", style: context.bodyLarge,),
+                  child: Text(
+                    "Popular Destinations",
+                    style: context.bodyLarge,
+                  ),
                 ),
-                      const HorizontalList(boxHeight: 120, height: 100, width: 110,widget: SizedBox(), isText: true, borderRadius: 20,),
-                       Padding(
-                  padding: const EdgeInsets.only( bottom: 8),
-                  child: Text("Explore the world again", style: context.bodyLarge,),
+                InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => DrinksPage()));
+                    },
+                    child: const HorizontalList(
+                      boxHeight: 120,
+                      height: 100,
+                      width: 110,
+                      widget: SizedBox(),
+                      isText: true,
+                      borderRadius: 20,
+                    )),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8),
+                  child: Text(
+                    "Explore the world again",
+                    style: context.bodyLarge,
+                  ),
                 ),
-                       const HorizontalList(boxHeight: 120, height: 100, width: 110, widget: SizedBox(),isText: true, borderRadius: 20,)
+                const HorizontalList(
+                  boxHeight: 120,
+                  height: 100,
+                  width: 110,
+                  widget: SizedBox(),
+                  isText: true,
+                  borderRadius: 20,
+                )
               ],
             ),
           ),

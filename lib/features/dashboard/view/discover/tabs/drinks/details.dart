@@ -2,20 +2,20 @@ import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
 import 'package:delivery_app/common/widgets/buttons/buttons.dart';
 import 'package:delivery_app/common/widgets/buttons/small_button.dart';
-import 'package:delivery_app/features/dashboard/home/models/models.dart';
 import 'package:delivery_app/features/dashboard/home/widgets/row_widget.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/drinks/drinks.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
-class DetailsPage extends StatefulWidget {
-  final SpecialMenu menu;
-  const DetailsPage({super.key, required this.menu});
+class DrinksDetails extends StatefulWidget {
+  final Drinks drinks;
+  const DrinksDetails({super.key, required this.drinks});
 
   @override
-  State<DetailsPage> createState() => _DetailsPageState();
+  State<DrinksDetails> createState() => _DrinksDetailsState();
 }
 
-class _DetailsPageState extends State<DetailsPage> {
+class _DrinksDetailsState extends State<DrinksDetails> {
   @override
   Widget build(BuildContext context) {
     final screenSize = MediaQuery.of(context).size;
@@ -29,7 +29,7 @@ class _DetailsPageState extends State<DetailsPage> {
               height: screenSize.height * 0.3,
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage(widget.menu.image), fit: BoxFit.cover)),
+                      image: AssetImage(widget.drinks.image), fit: BoxFit.cover)),
             ),
             Container(
               decoration: BoxDecoration(
@@ -45,18 +45,18 @@ class _DetailsPageState extends State<DetailsPage> {
                   children: [
                     Column(
                       children: [
-                       SmallButton(btnColor: Colors.grey.shade300, text: "see all")
+                        SmallButton(
+                            btnColor: Colors.grey.shade300, text: "see all")
                       ],
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                       
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              widget.menu.text,
+                              widget.drinks.name,
                               style: context.headlineMedium
                                   ?.copyWith(fontWeight: FontWeight.bold),
                             ),
@@ -82,19 +82,21 @@ class _DetailsPageState extends State<DetailsPage> {
                         const SizedBox(
                           height: 10,
                         ),
-                         RatingBar.builder(
-                          initialRating: 2,
-                          itemSize: 30,
-                          maxRating: 1,
-                          allowHalfRating: true,
-                          itemBuilder: (context, index) => Icon(
-                                Icons.star,
-                                color: context.secondary,
-                              ),
-                          onRatingUpdate: (rating) {
-                            print(rating);
-                          }),
-                          SizedBox(height: 20,),
+                        RatingBar.builder(
+                            initialRating: 2,
+                            itemSize: 30,
+                            maxRating: 1,
+                            allowHalfRating: true,
+                            itemBuilder: (context, index) => Icon(
+                                  Icons.star,
+                                  color: context.secondary,
+                                ),
+                            onRatingUpdate: (rating) {
+                              print(rating);
+                            }),
+                        const SizedBox(
+                          height: 20,
+                        ),
                         const Text(
                           "Provides various types of sizes,\nSuitable for relaxing time,\nself healing, etc.",
                         ),
@@ -103,18 +105,29 @@ class _DetailsPageState extends State<DetailsPage> {
                           children: [
                             const Text("Select type"),
                             SizedBox(
-                                width: screenSize.width * 0.4, child: const TextField())
+                                width: screenSize.width * 0.4,
+                                child: const TextField())
                           ],
                         ),
                         const SizedBox(
                           height: 30,
                         ),
-                        RowWidget(text: "plate of 6", btnColor: context.secondary, text2: "plate of 3", btnColor2: context.primaryColorLight),
+                        RowWidget(
+                            text: "mzinga",
+                            btnColor: context.secondary,
+                            text2: "half",
+                            btnColor2: context.primaryColorLight),
                         const SizedBox(
                           height: 10,
                         ),
-                        RowWidget(text: "single portion", btnColor: context.primaryColorLight, text2: "plate of two", btnColor2: context.primaryColorLight),
-                        const SizedBox(height: 40,),
+                        RowWidget(
+                            text: "qu",
+                            btnColor: context.primaryColorLight,
+                            text2: "Small Ice Espresso",
+                            btnColor2: context.primaryColorLight),
+                        const SizedBox(
+                          height: 40,
+                        ),
                         FullButton(
                           press: () {},
                           width: screenSize.width,
@@ -125,15 +138,32 @@ class _DetailsPageState extends State<DetailsPage> {
                                   Icons.shopping_cart_rounded,
                                   color: context.scaffoldColor,
                                 ),
-                                SizedBox(width: 10,),
+                                const SizedBox(
+                                  width: 10,
+                                ),
                                 Text(
                                   "Order Now",
-                                  style: context.headlineMedium?.copyWith(color: context.scaffoldColor, fontWeight: FontWeight.bold, fontSize: 23),
+                                  style: context.headlineMedium?.copyWith(
+                                      color: context.scaffoldColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 23),
                                 ),
-                                SizedBox(width: 20,),
-                                Text("|", style: context.headlineMedium?.copyWith(color: context.scaffoldColor),),
-                                 SizedBox(width: 20,),
-                                Text("\$25", style: TextStyle(color: context.scaffoldColor),)
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  "|",
+                                  style: context.headlineMedium
+                                      ?.copyWith(color: context.scaffoldColor),
+                                ),
+                                const SizedBox(
+                                  width: 20,
+                                ),
+                                Text(
+                                  "\$25",
+                                  style:
+                                      TextStyle(color: context.scaffoldColor),
+                                )
                               ],
                             ),
                           ),

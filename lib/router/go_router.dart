@@ -6,6 +6,7 @@ import 'package:delivery_app/features/dashboard/view/discover/discover.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/homepage.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/pages/payment.dart';
 import 'package:delivery_app/features/dashboard/view/homepage/pages/succes.dart';
+import 'package:delivery_app/features/dashboard/view/profile/profile.dart';
 import 'package:delivery_app/features/dashboard/view/search/search.dart';
 import 'package:delivery_app/features/onboarding/login_screen.dart';
 import 'package:delivery_app/features/onboarding/register.dart';
@@ -25,6 +26,7 @@ enum AppRoutes {
   discover,
   cart,
   search,
+  profile,
 }
 
 final GlobalKey<NavigatorState> rootNavigator = GlobalKey(debugLabel: 'root');
@@ -118,6 +120,15 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
                 name: AppRoutes.search.name,
                 builder: (context, state) {
                   return SearchPage(
+                    key: state.pageKey,
+                  );
+                },
+              ),
+              GoRoute(
+                path: 'profile',
+                name: AppRoutes.profile.name,
+                builder: (context, state) {
+                  return ProfilePage(
                     key: state.pageKey,
                   );
                 },
