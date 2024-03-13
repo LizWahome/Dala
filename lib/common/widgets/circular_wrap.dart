@@ -23,15 +23,18 @@ class _CircularWrapState extends State<CircularWrap> {
       children: List.generate(categories.length, (index) {
         return Column(
           children: [
-            CircleAvatar(
-              radius: 30,
-              backgroundColor: widget.color,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Icon(
-                  categories[index].icon,
-                  size: 40,
-                  color: Colors.white,
+            Padding(
+              padding: const EdgeInsets.only(right: 12.0),
+              child: CircleAvatar(
+                radius: 30,
+                backgroundColor: widget.color,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Icon(
+                    categories[index].icon,
+                    size: 40,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

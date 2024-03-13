@@ -2,7 +2,7 @@ class CheckOut {
   final String image;
   final String text;
   final String amount;
-  CheckOut({required this.image, required this.text, required this.amount});
+  CheckOut({required this.image, required this.text, required this.amount,});
 }
 
 class Payments {

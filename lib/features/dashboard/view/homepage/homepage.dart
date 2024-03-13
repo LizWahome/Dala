@@ -16,11 +16,13 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int index = 0;
   final List<CheckOut> foods = [
     CheckOut(
-        image: "assets/images/food-6697924_1280.jpg",
-        text: "Omelette",
-        amount: "\$ 25.00"),
+      image: "assets/images/food-6697924_1280.jpg",
+      text: "Omelette",
+      amount: "\$ 25.00",
+    ),
     CheckOut(
         image: "assets/images/macaroon-4090598_1280.jpg",
         text: "macaroon",
@@ -30,6 +32,7 @@ class _HomePageState extends State<HomePage> {
         text: "Beverage",
         amount: "\$ 10.00")
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,10 +69,11 @@ class _HomePageState extends State<HomePage> {
                               color: context.scaffoldColor,
                               fontWeight: FontWeight.bold),
                         ),
-                        widget.isText? SizedBox() : 
-                        Text("recipes",
-                            style: context.bodyLarge
-                                ?.copyWith(color: context.scaffoldColor))
+                        widget.isText
+                            ? SizedBox()
+                            : Text("recipes",
+                                style: context.bodyLarge
+                                    ?.copyWith(color: context.scaffoldColor))
                       ],
                     )
                   ],
@@ -118,29 +122,31 @@ class _HomePageState extends State<HomePage> {
                             ),
                             Row(
                               children: [
-                                Container(
-                                  margin: const EdgeInsets.only(right: 16),
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.amber),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: context.scaffoldColor,
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.remove_circle_rounded,
+                                    color: Colors.amber,
+                                    size: 30,
                                   ),
                                 ),
                                 Text(
-                                  "1",
+                                  "0",
                                   style: context.titleLarge
                                       ?.copyWith(fontWeight: FontWeight.bold),
                                 ),
-                                Container(
-                                  margin: const EdgeInsets.only(left: 16),
-                                  decoration: const BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: Colors.amber),
-                                  child: Icon(
-                                    Icons.add,
-                                    color: context.scaffoldColor,
+                                IconButton(
+                                  onPressed: () {
+                                    setState(() {
+                                    });
+                                  },
+                                  icon: Icon(
+                                    Icons.add_circle_rounded,
+                                    color: Colors.amber,
+                                    size: 30,
                                   ),
                                 ),
                               ],

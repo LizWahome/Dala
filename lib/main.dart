@@ -1,12 +1,23 @@
-import 'package:delivery_app/router/go_router.dart';
+import 'common/providers/logging_provider.dart';
 import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:overlay_support/overlay_support.dart';
 
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
+import 'router/go_router.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // await Firebase.initializeApp(
+  //   options: DefaultFirebaseOptions.currentPlatform,
+  // );
+  //await FirebaseApi().initNotifications();
+  final container = ProviderContainer();
+  container.read(loggingProvider).init();
+  runApp(UncontrolledProviderScope(
+    container: container,
+    child: const MyApp()));
 }
 
 class MyApp extends ConsumerWidget {
@@ -43,7 +54,7 @@ class MyApp extends ConsumerWidget {
             useMaterial3ErrorColors: true,
             useMaterial3: true,
             scheme: FlexScheme.deepBlue),
-            themeMode: ThemeMode.light,
+        themeMode: ThemeMode.light,
         routeInformationParser: router.routeInformationParser,
         routeInformationProvider: router.routeInformationProvider,
         routerDelegate: router.routerDelegate,

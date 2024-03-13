@@ -1,3 +1,4 @@
+import 'package:delivery_app/common/error/route_error.dart';
 import 'package:delivery_app/features/dashboard/view/cart/cart.dart';
 import 'package:delivery_app/features/dashboard/view/dashboard.dart';
 import 'package:delivery_app/features/dashboard/home/home.dart';
@@ -33,8 +34,8 @@ final GlobalKey<NavigatorState> rootNavigator = GlobalKey(debugLabel: 'root');
 final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
   return GoRouter(
       navigatorKey: rootNavigator,
-      initialLocation: '/login',
-      debugLogDiagnostics: true,
+      initialLocation: '/register',
+      debugLogDiagnostics: false,
       routes: [
         GoRoute(
           path: '/login',
@@ -83,7 +84,7 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
             path: '/dashboard',
             name: AppRoutes.dashboard.name,
             builder: (context, state) {
-              return DashBoardPage(
+              return CupertinoBottomSection(
                 key: state.pageKey,
               );
             },
@@ -152,5 +153,35 @@ final goRouterProvider = Provider.autoDispose<GoRouter>((ref) {
             );
           },
         )
-      ]);
+      ],
+      errorBuilder: (context, state) => RouteErrorScreen(errorMsg: state.error.toString(), key: state.pageKey,),
+      );
 });
+
+CustomTransitionPage buildPageWithDefaultTransition<T>({
+  required BuildContext context,
+  required GoRouterState state,
+  required Widget child,
+  Curve? curves,
+}) {
+  return CustomTransitionPage<T>(
+    key: state.pageKey,
+    transitionDuration: const Duration(milliseconds: 400),
+    fullscreenDialog: true,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) =>
+        SlideTransition(
+      position: animation.drive(
+        Tween<Offset>(
+          begin: const Offset(0.75, 0),
+          end: Offset.zero,
+        ).chain(CurveTween(curve: Curves.easeIn)),
+      ),
+      child: child,
+    ),
+    // FadeTransition(
+    //     opacity: CurveTween(curve: curves ?? Curves.easeInOutCirc)
+    //         .animate(animation),
+    //     child: child),
+  );
+}

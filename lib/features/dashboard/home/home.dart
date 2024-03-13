@@ -2,7 +2,12 @@ import 'package:delivery_app/common/extension/text_styles.dart';
 import 'package:delivery_app/common/extension/theme_colors.dart';
 import 'package:delivery_app/common/widgets/horizontal_list.dart';
 import 'package:delivery_app/common/widgets/one_line_row.dart';
+import 'package:delivery_app/features/dashboard/home/home2.dart';
 import 'package:delivery_app/features/dashboard/home/models/models.dart';
+import 'package:delivery_app/features/dashboard/view/discover/discover.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/cab/cab.dart';
+import 'package:delivery_app/features/dashboard/view/discover/tabs/drinks/drinks.dart';
+import 'package:delivery_app/features/dashboard/view/search/search.dart';
 import 'package:delivery_app/router/go_router.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -25,9 +30,21 @@ class _HomeScreenState extends State<HomeScreen> {
     Categories(icon: Icons.houseboat, text: "Apartment"),
     Categories(icon: Icons.border_all_rounded, text: "See All"),
   ];
+  List<Widget> screenContent = [
+    const HomeScreen2(),
+    const DiscoverPage(),
+    const DrinksPage(),
+    const DiscoverPage(),
+    const SearchPage(),
+    const DiscoverPage(),
+    const DiscoverPage(),
+    const DiscoverPage(),
+    const DiscoverPage(),
+  ];
 
   @override
   Widget build(BuildContext context) {
+    final message = ModalRoute.of(context)!.settings.arguments;
     final screenSize = MediaQuery.of(context).size;
     return Scaffold(
       body: Container(
@@ -36,6 +53,7 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Stack(
           children: [
             Stack(
+              clipBehavior: Clip.none,
               children: [
                 Container(
                   width: screenSize.width,
@@ -84,7 +102,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             )
                           ],
                         ),
-                        Spacer(),
+                        const Spacer(),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -93,6 +111,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Text(
                                   "Hello, Charles Otieno",
+                                  //"$message",
                                   style: context.dividerTextLarge?.copyWith(
                                       color: Colors.white, fontSize: 22),
                                 ),
@@ -110,10 +129,16 @@ class _HomeScreenState extends State<HomeScreen> {
                                 )
                               ],
                             ),
-                            const CircleAvatar(
-                              radius: 30,
-                              backgroundImage: AssetImage(
-                                  "assets/images/model-1814202_1280.jpg"),
+                            
+                            InkWell(
+                              onTap: () {
+                                context.pushNamed(AppRoutes.profile.name);
+                              },
+                              child: const CircleAvatar(
+                                radius: 30,
+                                backgroundImage: AssetImage(
+                                    "assets/images/model-1814202_1280.jpg"),
+                              ),
                             )
                           ],
                         )
@@ -127,7 +152,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: screenSize.width,
-                height: screenSize.height * 0.7,
+                height: screenSize.height * 0.625,
                 decoration: BoxDecoration(
                   color: context.secondary,
                 ),
@@ -137,7 +162,7 @@ class _HomeScreenState extends State<HomeScreen> {
               alignment: Alignment.bottomCenter,
               child: Container(
                 width: screenSize.width,
-                height: screenSize.height * 0.7,
+                height: screenSize.height * 0.625,
                 decoration: const BoxDecoration(
                     color: Colors.white,
                     borderRadius:
@@ -147,37 +172,52 @@ class _HomeScreenState extends State<HomeScreen> {
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
-                        OneLineRow(text: "Categories", widget:  IconButton(
+                        OneLineRow(
+                            text: "Categories",
+                            widget: IconButton(
                                 onPressed: () {},
                                 icon: const Icon(Icons.keyboard_control))),
                         Wrap(
                           children: List.generate(categories.length, (index) {
-                            return Column(
-                              children: [
-                                Card(
-                                  color: context.secondary,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(10.0),
-                                    child: Icon(
-                                      categories[index].icon,
-                                      size: 60,
-                                      color: Colors.white,
+                            return InkWell(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            screenContent[index]));
+                              },
+                              child: Column(
+                                children: [
+                                  Card(
+                                    color: context.secondary,
+                                    child: Padding(
+                                      padding: const EdgeInsets.all(10.0),
+                                      child: Icon(
+                                        categories[index].icon,
+                                        size: 60,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Text(categories[index].text)
-                              ],
+                                  Text(categories[index].text)
+                                ],
+                              ),
                             );
                           }),
                         ),
-                      OneLineRow(text: "Recommended", widget: IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(Icons.keyboard_control))),
-                      HorizontalList(),
-                       OneLineRow(text: "Nearby", widget:  IconButton(
+                        OneLineRow(
+                            text: "Recommended",
+                            widget: IconButton(
                                 onPressed: () {},
                                 icon: const Icon(Icons.keyboard_control))),
-                       HorizontalList()
+                        const HorizontalList(),
+                        OneLineRow(
+                            text: "Nearby",
+                            widget: IconButton(
+                                onPressed: () {},
+                                icon: const Icon(Icons.keyboard_control))),
+                        const HorizontalList()
                       ],
                     ),
                   ),
@@ -187,14 +227,6 @@ class _HomeScreenState extends State<HomeScreen> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.pushNamed(AppRoutes.home2.name);
-        },
-        child: Icon(Icons.arrow_right_alt_rounded),
-      ),
     );
   }
 }
-
-

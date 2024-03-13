@@ -190,12 +190,7 @@ class _HomeScreen2State extends State<HomeScreen2> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          context.pushNamed(AppRoutes.dashboard.name);
-        },
-        child: const Icon(Icons.arrow_right_alt_rounded),
-      ),
+   
     );
   }
 }
